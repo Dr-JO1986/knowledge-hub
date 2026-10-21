@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>บล็อกทั้งหมด - Knowledge Development Hub</title>
+<!-- ชี้ไปที่โฟลเดอร์ css ด้านนอก -->
+<link rel="stylesheet" href="../css/style.css"> 
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="../index.html">Knowledge Development Hub</a>
+    <nav aria-label="เมนูหลัก">
+      <ul>
+        <li><a href="../index.html">กลับหน้าแรก</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" style="padding: 60px 22px; min-height: 70vh;">
+  <h2>บล็อกและบันทึกการเดินทาง</h2>
+  <p class="lead">รวมเรื่องราว สถานที่ และประสบการณ์ที่ผมได้ไปพบเจอมา</p>
+  
+  <!-- ส่วนที่แสดงรายการโพสต์ -->
+  <div class="grid" id="blogList">
+    <p class="note">กำลังโหลดรายการบทความ...</p>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  <p>&copy; <span id="yr"></span> Knowledge Development Hub</p>
+</div></footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// ==========================================
+// 🔴 ข้อมูลบทความ (เวลาเพิ่มบทความใหม่ ก็มาเพิ่มในลิสต์นี้)
+// ==========================================
+const posts = [
+  {
+    title: "ทริปที่ 1: เที่ยวร้อยเอ็ด",
+    desc: "บันทึกการเดินทางครั้งแรก ปั่นจักรยานชมทุ่งนาและวัดกลางทุ่งยามเช้า",
+    link: "post-1.html",
+    tags: ["เที่ยว", "ธรรมชาติ"]
+  },
+  {
+    title: "ทริปที่ 2: ขึ้นภูเขา",
+    desc: "ทริปเดินป่าครั้งแรก ตื่นเต้นมาก ได้เจอทะเลหมอกสวยๆ",
+    link: "post-2.html",
+    tags: ["เดินป่า", "ผจญภัย"]
+  },
+  {
+    title: "ทริปที่ 3: ตลาดน้ำยามเย็น",
+    desc: "ช้อปปิ้งและชิมอาหารท้องถิ่นริมน้ำ บรรยากาศชิลมาก",
+    link: "post-3.html",
+    tags: ["อาหาร", "วัฒนธรรม"]
+  }
+];
+
+// ฟังก์ชันสำหรับสร้างการ์ดบทความ
+function renderPosts() {
+  const container = document.getElementById('blogList');
+  if(posts.length === 0) {
+    container.innerHTML = '<p class="note">ยังไม่มีบทความครับ</p>';
+    return;
+  }
+
+  let html = '';
+  posts.forEach(post => {
+    // แปลง array ของแท็ก ให้กลายเป็น HTML badge
+    const tagsHtml = post.tags.map(t => `<span class="tag green">${t}</span>`).join('');
+    
+    html += `
+      <a href="${post.link}" class="card" style="text-decoration: none; color: inherit; display: block; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
+        <h3 style="color: var(--moss-dark);">${post.title}</h3>
+        <p style="margin-bottom: 1rem;">${post.desc}</p>
+        <div>${tagsHtml}</div>
+      </a>
+    `;
+  });
+  
+  container.innerHTML = html;
+}
+
+// เรียกใช้งานเมื่อโหลดหน้าเว็บ
+renderPosts();
+</script>
+</body>
+</html>
