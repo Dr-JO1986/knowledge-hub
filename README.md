@@ -8,13 +8,13 @@
 - `js/` — JavaScript แยกโมดูล (ES modules)
   - `main.js` — entry point
   - `ui.js` — helper + lightbox + scroll spy + to-top
-  - `gallery.js` — แกลเลอรีจาก `data/gallery.json`
+  - `gallery.js` — แกลเลอรีแบบอัลบั้มจาก `data/gallery.json`
   - `jobs.js` — ประกาศงาน
   - `contact.js` — ฟอร์มติดต่อ
-- `data/gallery.json` — รายการรูป (id, url, thumb, title)
+- `data/gallery.json` — รายการรูป (url, thumb, title และ category ซึ่งไม่บังคับ)
 
 ## การตั้งค่า
-1. **แกลเลอรี**: อัปโหลดรูปเข้า ImgBB → คัดลอก Direct link → ใส่ใน `data/gallery.json`
+1. **แกลเลอรี**: อัปโหลดรูปเข้า ImgBB → คัดลอก Direct link → ใส่ใน `data/gallery.json` ระบุ `category` เพื่อจัดกลุ่มเป็นอัลบั้ม (หากไม่ระบุจะใช้ `title` แทน) โดยรูปแรกของอัลบั้มจะเป็นภาพปก
 2. **ประกาศงาน**: ใส่ URL Apps Script ใน `js/jobs.js` → `API_URL`
 3. **ฟอร์มติดต่อ**: ใส่ URL endpoint ใน `js/contact.js` → `FORM_ENDPOINT`
    - ทางเลือกที่ง่าย: ใช้ [Web3Forms](https://web3forms.com/) หรือ [Formspree](https://formspree.io/)
